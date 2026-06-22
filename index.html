@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, Nduk ❤️</title>
+
+    <!-- Google Fonts: Playfair Display (elegan) + Poppins (modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet" />
+
+    <!-- Stylesheet utama -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===================== LOADING SCREEN ===================== -->
+    <div id="loading-screen">
+      <div class="loading-content">
+        <div class="loading-heart">❤️</div>
+        <p class="loading-text">Menyiapkan kejutan untukmu...</p>
+        <div class="loading-bar"><div class="loading-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- ===================== AUDIO PLAYER (FLOATING) ===================== -->
+    <!-- Ganti src audio dengan file musik .mp3 milikmu -->
+    <div id="music-player" title="Putar / Jeda Musik">
+      <div class="music-icon" id="music-btn">🎵</div>
+      <span class="music-label">Musik</span>
+      <!-- Gunakan URL musik publik atau file lokal -->
+      <audio id="bg-music" loop>
+        <source
+          src="TULUS - Jatuh Suka (Official Lyric Video) [2uJut6USftQ].mp3"
+          type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <!-- ===================== HERO SECTION ===================== -->
+    <section id="hero">
+      <!-- Partikel bintang latar belakang -->
+      <div id="stars-container"></div>
+
+      <!-- Konten tengah hero -->
+      <div class="hero-content">
+        <p class="hero-eyebrow">✨ Sebuah hadiah digital khusus untukmu ✨</p>
+        <h1 class="hero-title">
+          Happy Birthday,<br /><span class="hero-name">Nduk</span> ❤️
+        </h1>
+        <p class="hero-sub">Untuk perempuan paling spesial dalam hidupku</p>
+        <button class="btn-primary" id="open-surprise-btn">
+          Buka Kejutan 🎁
+        </button>
+      </div>
+
+      <!-- Floating bunga / dekorasi -->
+      <div class="floating-deco deco-1">🌸</div>
+      <div class="floating-deco deco-2">🌷</div>
+      <div class="floating-deco deco-3">💫</div>
+      <div class="floating-deco deco-4">🌸</div>
+      <div class="floating-deco deco-5">✨</div>
+    </section>
+
+    <!-- ===================== MAIN CONTENT (tersembunyi awalnya) ===================== -->
+    <main id="main-content" class="hidden">
+      <!-- ==================== GALERI KENANGAN ==================== -->
+      <section id="gallery" class="section">
+        <div class="section-header">
+          <p class="section-eyebrow">📸 Kenangan</p>
+          <h2 class="section-title">Galeri Kisah Kita</h2>
+          <p class="section-sub">
+            Setiap foto menyimpan cerita yang tak terlupakan
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- 
+          CARA GANTI FOTO:
+          Ganti src="placeholder-X.jpg" dengan path foto aslimu.
+          Contoh: src="foto/foto1.jpg" 
+          atau URL online: src="https://..."
+        -->
+          <div
+            class="gallery-item"
+            data-src="https://picsum.photos/seed/love1/600/600">
+            <img src="gambar 2.jpeg" alt="Kenangan 1" loading="lazy" />
+            <div class="gallery-overlay"><span>💕 </span></div>
+          </div>
+          <div
+            class="gallery-item"
+            data-src="https://picsum.photos/seed/love2/600/600">
+            <img src="gambar 1.jpeg" alt="Kenangan 2" loading="lazy" />
+            <div class="gallery-overlay"><span>🌸</span></div>
+          </div>
+          <div
+            class="gallery-item"
+            data-src="https://picsum.photos/seed/love3/600/600">
+            <img src="gambar 5 (2).jpeg" alt="Kenangan 3" loading="lazy" />
+            <div class="gallery-overlay"><span>✨</span></div>
+          </div>
+          <div
+            class="gallery-item"
+            data-src="https://picsum.photos/seed/love4/600/600">
+            <img src="gambar 4.jpeg" alt="Kenangan 4" loading="lazy" />
+            <div class="gallery-overlay"><span>💖</span></div>
+          </div>
+          <div
+            class="gallery-item"
+            data-src="https://picsum.photos/seed/love5/600/600">
+            <img src="gambar 7.jpeg" alt="Kenangan 5" loading="lazy" />
+            <div class="gallery-overlay"><span>🌷</span></div>
+          </div>
+          <div
+            class="gallery-item"
+            data-src="https://picsum.photos/seed/love6/600/600">
+            <img src="gambar 6.jpeg" alt="Kenangan 6" loading="lazy" />
+            <div class="gallery-overlay"><span>💫</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lightbox Modal untuk Galeri -->
+      <div id="lightbox" class="hidden">
+        <button id="lightbox-close">✕</button>
+        <img id="lightbox-img" src="" alt="Foto besar" />
+      </div>
+
+      <!-- ==================== TIMELINE KISAH KITA ==================== -->
+      <section id="timeline" class="section">
+        <div class="section-header">
+          <p class="section-eyebrow">📅 Perjalanan Kita</p>
+          <h2 class="section-title">Timeline Kisah Kita</h2>
+          <p class="section-sub">Setiap langkah adalah cerita yang berharga</p>
+        </div>
+
+        <div class="timeline-container">
+          <!-- Item Timeline — tambah atau ubah sesuai kisah aslimu -->
+          <div class="timeline-item left reveal">
+            <div class="timeline-dot">🌸</div>
+            <div class="timeline-card">
+              <span class="timeline-date">Awal Mula</span>
+              <h3>Pertama Kali Kenal</h3>
+              <p>
+                Saat itulah aku pertama kali melihatmu, dan ada sesuatu yang
+                berbeda. Entah kenapa, namamu terasa sudah familiar di hati ini.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item right reveal">
+            <div class="timeline-dot">💬</div>
+            <div class="timeline-card">
+              <span class="timeline-date">Awal Chat</span>
+              <h3>Pertama Kali Chat</h3>
+              <p>
+                Chat pertama yang bikin jantung deg-degan. Setiap pesan terasa
+                sangat berarti dan selalu kutunggu balasanmu.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item left reveal">
+            <div class="timeline-dot">☕</div>
+            <div class="timeline-card">
+              <span class="timeline-date">Momen Spesial</span>
+              <h3>Pertama Kali Jalan Bareng</h3>
+              <p>
+                Hari itu terasa seperti mimpi. Akhirnya bisa melihat senyummu
+                secara nyata, dan aku sadar — aku sudah jatuh hati.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item right reveal">
+            <div class="timeline-dot">💕</div>
+            <div class="timeline-card">
+              <span class="timeline-date">Hari Penting</span>
+              <h3>Hari yang Mengubah Segalanya</h3>
+              <p>
+                Kamu setuju. Aku bahagia luar biasa. Sejak hari itu, dunia
+                terasa jauh lebih berwarna dan bermakna bersamamu.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item left reveal">
+            <div class="timeline-dot">🌟</div>
+            <div class="timeline-card">
+              <span class="timeline-date">Sekarang</span>
+              <h3>Ulang Tahunmu yang Spesial</h3>
+              <p>
+                Dan sekarang aku di sini, merayakan hari lahirmu dengan sepenuh
+                hati. Terima kasih sudah ada di hidupku, Nduk.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SURAT CINTA ==================== -->
+      <section id="letter" class="section">
+        <div class="section-header">
+          <p class="section-eyebrow">💌 Untukmu</p>
+          <h2 class="section-title">Sebuah Surat Kecil</h2>
+        </div>
+
+        <div class="letter-card glassmorphism">
+          <div class="letter-decoration">❝</div>
+          <div class="letter-body">
+            <p class="letter-greeting">Happy Birthday, Nduk!</p>
+
+            <p>
+              Selamat ulang tahun untuk orang yang paling berarti di hidupku.
+            </p>
+
+            <p>
+              Jujur, hari ini rasanya sedikit berbeda. Ada rasa sedih yang
+              terselip karena tahun ini aku harus merayakannya dari kejauhan,
+              tanpa bisa melihat langsung senyummu saat melihat kue atau
+              mendengar tawamu secara nyata. Aku sudah membayangkan betapa
+              bahagianya kalau kita bisa duduk bersama, berbagi cerita, dan
+              merayakan hari ini tanpa batas waktu.
+            </p>
+
+            <p>
+              Tapi, meski jarak memisahkan kita hari ini, aku ingin kamu tahu
+              bahwa ingatan dan doaku tertuju sepenuhnya padamu. Aku merenungkan
+              betapa beruntungnya aku bisa mengenal sosok sepertimu. Terima
+              kasih sudah menjadi tempatku pulang, menjadi pendengar yang sabar,
+              dan menjadi seseorang yang selalu memberikan warna di hari-hariku
+              yang biasa.
+            </p>
+
+            <p>
+              Di hari yang spesial ini, aku berharap kamu mendapatkan semua
+              kebaikan yang selama ini kamu perjuangkan. Semoga tahun ini
+              membawa banyak kejutan manis, kesehatan yang baik, dan keberanian
+              untuk terus mengejar apa pun yang membuat hatimu merasa hidup.
+              Jangan pernah lelah untuk menjadi dirimu yang sekarang, karena
+              sosokmu sudah lebih dari cukup untuk membuat duniaku terasa jauh
+              lebih indah.
+            </p>
+
+            <p>
+              Simpan dulu ya keinginan kita untuk merayakannya bersama. Nanti,
+              saat waktu dan keadaan mengizinkan, aku janji kita akan membuat
+              perayaan yang jauh lebih spesial, mungkin lebih dari yang pernah
+              kita bayangkan sebelumnya.
+            </p>
+
+            <p>
+              Selamat menikmati harimu, ya. Rayakan dirimu sendiri hari ini,
+              karena kamu benar-benar berhak mendapatkan semua kebahagiaan yang
+              ada di dunia ini.
+            </p>
+
+            <p class="letter-sign">
+              Dengan sepenuh cinta,<br /><strong>— Untukmu, selalu ❤️</strong>
+            </p>
+          </div>
+
+          <!-- Tombol putar musik romantis di dalam surat -->
+          <div class="letter-music-hint">
+            <button class="music-play-btn" id="letter-music-btn">
+              🎵 Klik untuk Rasakan Musiknya
+            </button>
+            <p class="music-hint-text">
+              Putar musik romantis sambil membaca suratnya ✨
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== COUNTDOWN ULANG TAHUN ==================== -->
+      <section id="countdown" class="section">
+        <div class="section-header">
+          <p class="section-eyebrow">⏳ Menunggu Hari Spesialmu</p>
+          <h2 class="section-title">Hitung Mundur</h2>
+          <p class="section-sub">Menuju ulang tahunmu berikutnya</p>
+        </div>
+
+        <div class="countdown-wrapper glassmorphism">
+          <div class="countdown-grid">
+            <div class="countdown-box">
+              <span class="countdown-number" id="cd-days">00</span>
+              <span class="countdown-label">Hari</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-box">
+              <span class="countdown-number" id="cd-hours">00</span>
+              <span class="countdown-label">Jam</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-box">
+              <span class="countdown-number" id="cd-minutes">00</span>
+              <span class="countdown-label">Menit</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-box">
+              <span class="countdown-number" id="cd-seconds">00</span>
+              <span class="countdown-label">Detik</span>
+            </div>
+          </div>
+          <p class="countdown-message">
+            Sampai hari spesialmu lagi, aku tetap mencintaimu 💕
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== KEJUTAN AKHIR ==================== -->
+      <section id="surprise" class="section">
+        <div class="section-header">
+          <p class="section-eyebrow">🎁 Ada Kejutan!</p>
+          <h2 class="section-title">Satu Lagi Untukmu</h2>
+        </div>
+
+        <div class="surprise-center">
+          <button class="btn-surprise" id="trigger-surprise">
+            Klik untuk Kejutan 🎁
+          </button>
+        </div>
+
+        <!-- Pesan kejutan — tersembunyi dulu -->
+        <div id="surprise-message" class="hidden">
+          <div class="surprise-text">
+            <h2>Aku Sayang Kamu Selalu ❤️</h2>
+            <p>
+              Semoga hidupmu selalu dipenuhi cinta, tawa, dan kebahagiaan yang
+              tak terkira.
+            </p>
+            <p>Happy Birthday, <strong>Nduk</strong>! 🎂🌸✨</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== CANVAS untuk CONFETTI & HATI ===================== -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Script utama -->
+    <script src="script.js"></script>
+  </body>
+</html>

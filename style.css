@@ -1,0 +1,823 @@
+/* ============================================================
+   STYLE.CSS — Birthday Website untuk Nduk ❤️
+   Tema: Pink Pastel, Ungu Lembut, Putih, Gold
+   ============================================================ */
+
+/* ── 1. RESET & VARIABEL WARNA ─────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Palet warna utama */
+  --pink-light:   #FFD6E7;
+  --pink-mid:     #FFB3CE;
+  --pink-deep:    #E8789A;
+  --purple-light: #E8D5F5;
+  --purple-mid:   #C9A6E8;
+  --purple-deep:  #9B6BBE;
+  --gold:         #D4AF7A;
+  --gold-light:   #F0D89A;
+  --white:        #FFFFFF;
+  --off-white:    #FDF8FF;
+  --text-dark:    #3D2255;
+  --text-mid:     #7A5C8C;
+  --text-light:   #B09CC5;
+
+  /* Gradien utama */
+  --grad-hero:    linear-gradient(135deg, #FFB3CE 0%, #E8D5F5 40%, #C9A6E8 75%, #9B6BBE 100%);
+  --grad-section: linear-gradient(160deg, #FDF8FF 0%, #F5E8FF 100%);
+  --grad-gold:    linear-gradient(135deg, #D4AF7A, #F0D89A, #D4AF7A);
+
+  /* Font */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Poppins', sans-serif;
+
+  /* Border radius */
+  --radius-sm: 12px;
+  --radius-md: 24px;
+  --radius-lg: 40px;
+
+  /* Shadow */
+  --shadow-soft: 0 8px 32px rgba(155, 107, 190, 0.15);
+  --shadow-glow: 0 0 40px rgba(201, 166, 232, 0.4);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--off-white);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ── 2. LOADING SCREEN ─────────────────────────────────── */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--grad-hero);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loading-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-content {
+  text-align: center;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.loading-heart {
+  font-size: 4rem;
+  animation: heartbeat 1s ease infinite;
+  margin-bottom: 1rem;
+}
+
+.loading-text {
+  color: white;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.03em;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 99px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.loading-fill {
+  height: 100%;
+  background: white;
+  border-radius: 99px;
+  animation: loadingFill 2s ease forwards;
+}
+
+@keyframes loadingFill {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+/* ── 3. MUSIC PLAYER (Floating) ────────────────────────── */
+#music-player {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+#music-player:hover { transform: scale(1.1); }
+
+.music-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--grad-hero);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 20px rgba(155,107,190,0.4);
+  animation: musicPulse 2s ease infinite;
+}
+.music-icon.playing { animation: musicSpin 3s linear infinite; }
+
+.music-label {
+  font-size: 0.65rem;
+  color: var(--purple-deep);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(155,107,190,0.4); }
+  50%       { box-shadow: 0 4px 30px rgba(155,107,190,0.7); }
+}
+@keyframes musicSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── 4. HERO SECTION ───────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: var(--grad-hero);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Bintang latar */
+#stars-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle var(--dur, 3s) ease infinite var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50%       { opacity: 0.8; transform: scale(1); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1s ease 2.5s both;
+}
+
+.hero-eyebrow {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease 2.7s both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 700;
+  color: white;
+  line-height: 1.15;
+  text-shadow: 0 4px 30px rgba(100, 40, 120, 0.3);
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease 2.9s both;
+}
+
+.hero-name {
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+  display: block;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: rgba(255,255,255,0.88);
+  font-style: italic;
+  font-family: var(--font-display);
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 1s ease 3.1s both;
+}
+
+/* ── 5. TOMBOL UTAMA ───────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  background: white;
+  color: var(--purple-deep);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 99px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(100, 40, 120, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  letter-spacing: 0.03em;
+  animation: fadeInUp 1s ease 3.3s both;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 40px rgba(100, 40, 120, 0.4);
+  background: var(--gold-light);
+  color: var(--text-dark);
+}
+
+/* ── 6. FLOATING DEKORASI HERO ─────────────────────────── */
+.floating-deco {
+  position: absolute;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: floatDeco var(--dur, 6s) ease-in-out infinite var(--delay, 0s);
+  opacity: 0.7;
+}
+.deco-1 { top: 10%; left: 8%;  --dur: 5s; --delay: 0s; }
+.deco-2 { top: 20%; right: 10%; --dur: 7s; --delay: 1s; }
+.deco-3 { bottom: 25%; left: 12%; --dur: 6s; --delay: 0.5s; }
+.deco-4 { bottom: 15%; right: 8%;  --dur: 8s; --delay: 2s; }
+.deco-5 { top: 50%; left: 5%;   --dur: 5.5s; --delay: 1.5s; }
+
+@keyframes floatDeco {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* ── 7. SECTION UMUM ───────────────────────────────────── */
+.section {
+  padding: 6rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--purple-deep);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  color: var(--text-mid);
+  font-size: 1rem;
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+/* Garis separator antarsection */
+.section + .section {
+  border-top: 1px solid rgba(201, 166, 232, 0.2);
+}
+
+/* ── 8. GALERI ─────────────────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.gallery-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(155,107,190,0.3);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.gallery-item:hover img { transform: scale(1.08); }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(100,40,120,0.7) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span {
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Lightbox */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 10, 50, 0.92);
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+#lightbox.hidden { display: none; }
+
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  object-fit: contain;
+  animation: scaleIn 0.35s ease;
+}
+
+#lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--purple-deep);
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+#lightbox-close:hover { transform: scale(1.1); }
+
+/* ── 9. TIMELINE ───────────────────────────────────────── */
+.timeline-container {
+  position: relative;
+  padding: 1rem 0;
+}
+
+/* Garis tengah timeline */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--purple-mid), var(--pink-mid), transparent);
+  transform: translateX(-50%);
+}
+
+@media (max-width: 700px) {
+  .timeline-container::before { left: 24px; }
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Posisi kiri/kanan */
+.timeline-item.left  { flex-direction: row-reverse; text-align: right; }
+.timeline-item.right { flex-direction: row;         text-align: left; }
+
+@media (max-width: 700px) {
+  .timeline-item.left,
+  .timeline-item.right {
+    flex-direction: row;
+    text-align: left;
+    padding-left: 60px;
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  background: white;
+  border-radius: 50%;
+  border: 3px solid var(--purple-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-soft);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+@media (max-width: 700px) {
+  .timeline-dot { left: 24px; transform: translateX(-50%); }
+}
+
+.timeline-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--shadow-soft);
+  max-width: 42%;
+  border-left: 3px solid var(--purple-mid);
+  transition: box-shadow 0.3s ease;
+}
+.timeline-item.left .timeline-card { border-left: none; border-right: 3px solid var(--pink-mid); }
+.timeline-card:hover { box-shadow: var(--shadow-glow); }
+
+@media (max-width: 700px) {
+  .timeline-card { max-width: 100%; border-left: 3px solid var(--purple-mid) !important; border-right: none !important; }
+}
+
+.timeline-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple-deep);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-card p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* ── 10. SURAT CINTA ────────────────────────────────────── */
+/* Glassmorphism mixin */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 12px 48px rgba(155, 107, 190, 0.2);
+}
+
+#letter {
+  background: linear-gradient(160deg, #F5E8FF 0%, #FFE8F3 100%);
+  border-radius: var(--radius-lg);
+  max-width: 100%;
+  padding: 6rem 1.5rem;
+}
+
+.letter-card {
+  max-width: 780px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  padding: 3rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .letter-card { padding: 2rem 1.5rem; }
+}
+
+.letter-decoration {
+  font-family: var(--font-display);
+  font-size: 8rem;
+  color: var(--purple-light);
+  position: absolute;
+  top: -1.5rem;
+  left: 1rem;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.letter-body {
+  position: relative;
+  z-index: 1;
+}
+
+.letter-body p {
+  font-size: 1rem;
+  color: var(--text-dark);
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+}
+
+.letter-greeting {
+  font-family: var(--font-display);
+  font-size: 1.6rem !important;
+  font-weight: 700;
+  color: var(--purple-deep) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.letter-sign {
+  margin-top: 2rem !important;
+  font-style: italic;
+  color: var(--purple-deep) !important;
+}
+
+/* Tombol musik di dalam surat */
+.letter-music-hint {
+  margin-top: 2rem;
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(201,166,232,0.3);
+}
+
+.music-play-btn {
+  background: var(--grad-hero);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 99px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(155,107,190,0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.music-play-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(155,107,190,0.5);
+}
+
+.music-hint-text {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+/* ── 11. COUNTDOWN ──────────────────────────────────────── */
+#countdown {
+  background: var(--grad-section);
+  max-width: 100%;
+  padding: 6rem 1.5rem;
+}
+
+.countdown-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  min-width: 80px;
+  box-shadow: var(--shadow-soft);
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  background: var(--grad-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+.countdown-number.flip { transform: scale(1.2); }
+
+.countdown-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+}
+
+.countdown-sep {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--purple-mid);
+  line-height: 1;
+  margin-top: -1rem;
+}
+
+.countdown-message {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--text-mid);
+  font-size: 1rem;
+}
+
+/* ── 12. KEJUTAN AKHIR ──────────────────────────────────── */
+#surprise {
+  text-align: center;
+  padding: 6rem 1.5rem 8rem;
+}
+
+.surprise-center { margin: 2rem 0; }
+
+.btn-surprise {
+  display: inline-block;
+  padding: 1.1rem 3rem;
+  background: var(--grad-hero);
+  color: white;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  font-style: italic;
+  border: none;
+  border-radius: 99px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(155,107,190,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 0.02em;
+}
+.btn-surprise:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 16px 48px rgba(155,107,190,0.6);
+}
+
+#surprise-message {
+  animation: fadeInUp 0.8s ease forwards;
+}
+#surprise-message.hidden { display: none; }
+
+.surprise-text {
+  max-width: 600px;
+  margin: 2rem auto 0;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 60px rgba(155,107,190,0.25);
+}
+
+.surprise-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: var(--purple-deep);
+  margin-bottom: 1rem;
+  animation: heartbeat 1.5s ease infinite;
+}
+
+.surprise-text p {
+  color: var(--text-mid);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.btn-link {
+  margin-top: 1.5rem;
+  display: inline-block;
+}
+
+/* ── 13. CONFETTI CANVAS ────────────────────────────────── */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 700;
+}
+
+/* ── 14. UTILITAS ───────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* Animasi fadeIn */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── 15. MAIN CONTENT (transisi masuk) ─────────────────── */
+#main-content {
+  animation: fadeIn 0.8s ease forwards;
+}
+#main-content.hidden { display: none !important; }
+
+/* Section dengan background warna bergantian */
+#gallery  { background: var(--off-white); }
+#timeline { background: linear-gradient(160deg, #F5E8FF 0%, #FFF0F7 100%); max-width: 100%; padding: 6rem 1.5rem; }
+#timeline .section { max-width: 1100px; margin: 0 auto; padding: 0; }
+#surprise { background: linear-gradient(160deg, #FFF0F7 0%, #F5E8FF 100%); max-width: 100%; padding: 6rem 1.5rem 8rem; }
+
+/* ── 16. SCROLLBAR KUSTOM ───────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--purple-light); }
+::-webkit-scrollbar-thumb { background: var(--purple-mid); border-radius: 99px; }
+
+/* ── 17. REDUCE MOTION (aksesibilitas) ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
